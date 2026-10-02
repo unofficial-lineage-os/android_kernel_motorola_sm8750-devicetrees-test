@@ -1,63 +1,120 @@
 // SPDX-License-Identifier: BSD-3-Clause
 /*
- * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
  */
 
 #include <dt-bindings/thermal/thermal_qti.h>
 
 &thermal_zones {
-	pmxr2230_tz {
+	socd {
 		cooling-maps {
-			pmxr2230_apc1 {
-				trip = <&pmxr2230_trip0>;
+			socd_apc1 {
+				trip = <&socd_trip>;
 				cooling-device = <&APC1_MX_CX_PAUSE 1 1>;
 			};
 
-			pmxr2230_apc0 {
-				trip = <&pmxr2230_trip0>;
-				cooling-device = <&APC0_MX_CX_PAUSE 1 1>;
+			socd_cdsp1 {
+				trip = <&socd_trip>;
+				cooling-device = <&cdsp_sw 4 4>;
+			};
+
+			socd_gpu0 {
+				trip = <&socd_trip>;
+				cooling-device = <&msm_gpu 4 4>;
 			};
 		};
 	};
 
-	pm8550vs_d_tz {
+	pmih010x-bcl-lvl0 {
 		cooling-maps {
-			pm8550vs_d_cdsp {
-				trip = <&pm8550vs_d_trip0>;
-				cooling-device = <&cdsp_sw 5 THERMAL_NO_LIMIT>;
+			lbat_modem0 {
+				trip = <&b_bcl_lvl0>;
+				cooling-device = <&modem_bcl 1 1>;
 			};
 
-			pm8550vs_d_lte {
-				trip = <&pm8550vs_d_trip0>;
-				cooling-device = <&modem_lte_dsc 255 255>;
-			};
-
-			pm8550vs_d_nr {
-				trip = <&pm8550vs_d_trip0>;
-				cooling-device = <&modem_nr_scg_dsc 255 255>;
+			lbat_gpu0 {
+				trip = <&b_bcl_lvl0>;
+				cooling-device = <&msm_gpu 1 1>;
 			};
 		};
 	};
 
-	pm8550vs_f_tz {
+	pmih010x-bcl-lvl1 {
 		cooling-maps {
-			pm8550vs_f_gpu {
-				trip = <&pm8550vs_f_trip0>;
-				cooling-device = <&msm_gpu 7 THERMAL_NO_LIMIT>;
+			lbat_modem1 {
+				trip = <&b_bcl_lvl1>;
+				cooling-device = <&modem_bcl 2 2>;
+			};
+
+			lbat_gpu1 {
+				trip = <&b_bcl_lvl1>;
+				cooling-device = <&msm_gpu 2 2>;
 			};
 		};
 	};
 
-	pm8550vs_g_tz {
+	pmih010x-bcl-lvl2 {
 		cooling-maps {
-			pm8550vs_g_apc1 {
-				trip = <&pm8550vs_g_trip0>;
-				cooling-device = <&APC1_MX_CX_PAUSE 1 1>;
+			lbat_gpu2 {
+				trip = <&b_bcl_lvl2>;
+				cooling-device = <&msm_gpu 3 3>;
+			};
+		};
+	};
+
+	pm7550ba-bcl-lvl0 {
+		cooling-maps {
+			vph_0_nr_scg {
+				trip = <&bcl_lvl0>;
+				cooling-device = <&modem_nr_scg_dsc 3 3>;
 			};
 
-			pm8550vs_g_apc0 {
-				trip = <&pm8550vs_g_trip0>;
-				cooling-device = <&APC0_MX_CX_PAUSE 1 1>;
+			vph_0_nr {
+				trip = <&bcl_lvl0>;
+				cooling-device = <&modem_nr_dsc 6 6>;
+			};
+
+			vph_0_mdm_lte {
+				trip = <&bcl_lvl0>;
+				cooling-device = <&modem_lte_dsc 8 8>;
+			};
+
+			vph_gpu0 {
+				trip = <&bcl_lvl0>;
+				cooling-device = <&msm_gpu 2 2>;
+			};
+		};
+	};
+
+	pm7550ba-bcl-lvl1 {
+		cooling-maps {
+			vph_1_nr_scg {
+				trip = <&bcl_lvl1>;
+				cooling-device = <&modem_nr_scg_dsc 10 10>;
+			};
+
+			vph_1_nr {
+				trip = <&bcl_lvl1>;
+				cooling-device = <&modem_nr_dsc 9 9>;
+			};
+
+			vph_1_mdm_lte {
+				trip = <&bcl_lvl1>;
+				cooling-device = <&modem_lte_dsc 10 10>;
+			};
+
+			vph_gpu1 {
+				trip = <&bcl_lvl1>;
+				cooling-device = <&msm_gpu 3 3>;
+			};
+		};
+	};
+
+	pm7550ba-bcl-lvl2 {
+		cooling-maps {
+			vph_gpu2 {
+				trip = <&bcl_lvl2>;
+				cooling-device = <&msm_gpu 7 7>;
 			};
 		};
 	};
@@ -90,12 +147,12 @@
 		cooling-maps {
 			lbat_1_nr_scg {
 				trip = <&bcl_lvl1>;
-				cooling-device = <&modem_nr_scg_dsc 100 100>;
+				cooling-device = <&modem_nr_scg_dsc 10 10>;
 			};
 
 			lbat_1_nr {
 				trip = <&bcl_lvl1>;
-				cooling-device = <&modem_nr_dsc 10 10>;
+				cooling-device = <&modem_nr_dsc 9 9>;
 			};
 
 			lbat_1_mdm_lte {

@@ -1,3 +1,5 @@
+load("//msm-kernel:moto_product.bzl", "mmi_product_name")
+
 _platform_map = {
     "sdxkova": {
         "dtb_list": [
@@ -21,131 +23,21 @@ _platform_map = {
     },
     "sun": {
         "dtb_list": [
-            # keep sorted
-            {"name": "sun.dtb"},
-            {
-                "name": "sunp.dtb",
-                "apq": True,
-            },
-            {
-                "name": "sunp-v2.dtb",
-                "apq": True,
-            },
-            {"name": "sun-v2.dtb"},
-            {"name": "sun-tp.dtb"},
-            {"name": "sun-tp-v2.dtb"},
-            {
-                "name": "sunp-tp.dtb",
-                "apq": True,
-            },
-            {
-                "name": "sunp-tp-v2.dtb",
-                "apq": True,
-            },
+            {"name": "sun-tp-leap-base.dtb", "product": "leap"},
+            {"name": "sun-tp-v2-leap-base.dtb", "product": "leap"},
         ],
         "dtbo_list": [
             # keep sorted
-            {"name": "sun-atp-overlay.dtbo"},
-            {"name": "sun-cdp-kiwi-overlay.dtbo"},
-            {"name": "sun-cdp-kiwi-v8-overlay.dtbo"},
-            {"name": "sun-cdp-nfc-overlay.dtbo"},
-            {"name": "sun-cdp-no-display-overlay.dtbo"},
-            {"name": "sun-cdp-overlay.dtbo"},
-            {"name": "sun-cdp-v8-overlay.dtbo"},
-            {"name": "sun-mtp-3.5mm-kiwi-v8-overlay.dtbo"},
-            {"name": "sun-mtp-3.5mm-overlay.dtbo"},
-            {"name": "sun-mtp-kiwi-overlay.dtbo"},
-            {"name": "sun-mtp-kiwi-v8-overlay.dtbo"},
-            {"name": "sun-mtp-nfc-overlay.dtbo"},
-            {"name": "sun-mtp-overlay.dtbo"},
-            {"name": "sun-mtp-qmp1000-overlay.dtbo"},
-            {"name": "sun-mtp-qmp1000-v8-overlay.dtbo"},
-            {"name": "sun-mtp-v8-overlay.dtbo"},
-            {"name": "sun-qrd-sku1-overlay.dtbo"},
-            {"name": "sun-qrd-sku1-v8-overlay.dtbo"},
-            {"name": "sun-qrd-sku2-v8-overlay.dtbo"},
-            {"name": "sun-rcm-kiwi-overlay.dtbo"},
-            {"name": "sun-rcm-kiwi-v8-overlay.dtbo"},
-            {"name": "sun-rcm-overlay.dtbo"},
-            {"name": "sun-rcm-v8-overlay.dtbo"},
-            {"name": "sunp-hdk-overlay.dtbo"},
-            {"name": "sun-rumi-overlay.dtbo"},
+            {"name": "sun-leap-evb-overlay.dtbo", "product": "leap"},
+            {"name": "sun-leap-evt1-overlay.dtbo", "product": "leap"},
+            {"name": "sun-leap-pvt1-overlay.dtbo", "product": "leap"},
         ],
-        "binary_compatible_with": ["tuna", "kera"],
-    },
-    "sun-le": {
-        "dtb_list": [
-            # keep sorted
-            {"name": "sun.dtb"},
-            {
-                "name": "sunp.dtb",
-                "apq": True,
-            },
-            {
-                "name": "sunp-v2.dtb",
-                "apq": True,
-            },
-            {"name": "sun-v2.dtb"},
-            {"name": "sun-tp.dtb"},
-            {"name": "sun-tp-v2.dtb"},
-            {
-                "name": "sunp-tp.dtb",
-                "apq": True,
-            },
-            {
-                "name": "sunp-tp-v2.dtb",
-                "apq": True,
-            },
-        ],
-        "dtbo_list": [
-            # keep sorted
-            {"name": "sun-atp-overlay.dtbo"},
-            {"name": "sun-cdp-kiwi-overlay.dtbo"},
-            {"name": "sun-cdp-kiwi-v8-overlay.dtbo"},
-            {"name": "sun-cdp-nfc-overlay.dtbo"},
-            {"name": "sun-cdp-no-display-overlay.dtbo"},
-            {"name": "sun-cdp-overlay.dtbo"},
-            {"name": "sun-cdp-v8-overlay.dtbo"},
-            {"name": "sun-mtp-3.5mm-kiwi-v8-overlay.dtbo"},
-            {"name": "sun-mtp-3.5mm-overlay.dtbo"},
-            {"name": "sun-mtp-kiwi-overlay.dtbo"},
-            {"name": "sun-mtp-kiwi-v8-overlay.dtbo"},
-            {"name": "sun-mtp-nfc-overlay.dtbo"},
-            {"name": "sun-mtp-overlay.dtbo"},
-            {"name": "sun-mtp-qmp1000-overlay.dtbo"},
-            {"name": "sun-mtp-qmp1000-v8-overlay.dtbo"},
-            {"name": "sun-mtp-v8-overlay.dtbo"},
-            {"name": "sun-qrd-sku1-overlay.dtbo"},
-            {"name": "sun-qrd-sku1-v8-overlay.dtbo"},
-            {"name": "sun-qrd-sku2-v8-overlay.dtbo"},
-            {"name": "sun-rcm-kiwi-overlay.dtbo"},
-            {"name": "sun-rcm-kiwi-v8-overlay.dtbo"},
-            {"name": "sun-rcm-overlay.dtbo"},
-            {"name": "sun-rcm-v8-overlay.dtbo"},
-            {"name": "sunp-hdk-overlay.dtbo"},
-            {"name": "sun-rumi-overlay.dtbo"},
-        ],
-    },
-    "qcs610": {
-        "dtb_list": [
-            # keep sorted
-            {"name": "qcs610.dtb"},
-        ],
-        "dtbo_list": [
-            # keep sorted
-            {"name": "qcs610-iot-overlay.dtbo"},
-            {"name": "qcs610-ipc-overlay.dtbo"},
-            {"name": "qcs610-opk-overlay.dtbo"},
-        ],
+        #"binary_compatible_with": ["tuna", "kera"],
     },
     "tuna": {
         "dtb_list": [
             {"name": "tuna.dtb"},
             {"name": "tuna7.dtb"},
-            {
-                "name": "tunap.dtb",
-                "apq": True,
-            },
         ],
         "dtbo_list": [
             {
@@ -168,129 +60,12 @@ _platform_map = {
     "kera": {
         "dtb_list": [
             {"name": "kera.dtb"},
-            {"name": "kera-iot.dtb"},
-            {
-                "name": "kerap.dtb",
-                "apq": True,
-            },
-            {
-                "name": "kerap-iot.dtb",
-                "apq": True,
-            },
-            {
-                "name": "kera-qmb.dtb",
-                "apq": False,
-            },
-            {
-                "name": "kerap-qna.dtb",
-                "apq": True,
-            },
         ],
         "dtbo_list": [
             {
                 "name": "kera-rumi-overlay.dtbo",
                 "apq": False,
             },
-            {"name": "kera-atp-overlay.dtbo"},
-            {"name": "kera-mtp-qca6750-ufs4-overlay.dtbo"},
-            {"name": "kera-mtp-qca6750-ufs3-overlay.dtbo"},
-            {"name": "kera-mtp-qca6750-qmp1000-overlay.dtbo"},
-            {"name": "kera-mtp-wcn7750-qmp1000-overlay.dtbo"},
-            {"name": "kera-mtp-wcn7750-ufs3-overlay.dtbo"},
-            {"name": "kera-mtp-wcn7750-ufs4-overlay.dtbo"},
-            {"name": "kera-cdp-qca6750-ufs2-overlay.dtbo"},
-            {"name": "kera-cdp-qca6750-ufs3-overlay.dtbo"},
-            {"name": "kera-cdp-qca6750-ufs4-overlay.dtbo"},
-            {"name": "kera-iot-cdp-qca6750-ufs4-overlay.dtbo"},
-            {"name": "kera-cdp-qca6750-ufs4-slt-overlay.dtbo"},
-            {"name": "kera-cdp-emmc-overlay.dtbo"},
-            {"name": "kera-qrd-wcn7750-ufs4-overlay.dtbo"},
-            {"name": "kera-qrd-wcn7750-ufs2-overlay.dtbo"},
-            {"name": "kera-qrd-wcn7750-ufs3-overlay.dtbo"},
-            {"name": "kera-qrd-qca6750-ufs2-overlay.dtbo"},
-            {"name": "kera-rcm-qca6750-ufs4-overlay.dtbo"},
-            {"name": "kera-rcm-qca6750-ufs2-overlay.dtbo"},
-            {"name": "kera-rcm-qca6750-ufs3-overlay.dtbo"},
-            {"name": "kera-rcm-wcn7750-ufs2-overlay.dtbo"},
-            {"name": "kera-rcm-wcn7750-ufs3-overlay.dtbo"},
-            {"name": "kera-rcm-wcn7750-ufs4-overlay.dtbo"},
-            {"name": "kera-rcm-wcn7750-emmc-overlay.dtbo"},
-            {"name": "kera-rcm-wcn7750-ufs3-no-display-overlay.dtbo"},
-            {"name": "kera-rcm-wcn7750-ufs4-no-display-overlay.dtbo"},
-            {"name": "kera-rcm-wcn7750-emmc-no-display-overlay.dtbo"},
-            {"name": "kera-idp-emmc-overlay.dtbo"},
-            {"name": "kera-idp-ufs3-overlay.dtbo"},
-            {"name": "kera-evk-emmc-overlay.dtbo"},
-            {"name": "kera-evk-emmc-hdmiearc-dmic-overlay.dtbo"},
-            {"name": "kera-evk-emmc-hdmiearc-hat-overlay.dtbo"},
-            {"name": "kera-evk-emmc-lt9611uxd-dmic-overlay.dtbo"},
-            {"name": "kera-evk-emmc-lt9611uxd-hat-overlay.dtbo"},
-            {"name": "kera-evk-emmc-wcd9378-dmic-overlay.dtbo"},
-            {"name": "kera-evk-emmc-wcd9378-hat-overlay.dtbo"},
-        ],
-    },
-    "kera-le": {
-        "dtb_list": [
-            {"name": "kera.dtb"},
-            {"name": "kera-iot.dtb"},
-            {
-                "name": "kerap.dtb",
-                "apq": True,
-            },
-            {
-                "name": "kerap-iot.dtb",
-                "apq": True,
-            },
-            {
-                "name": "kera-qmb.dtb",
-                "apq": False,
-            },
-            {
-                "name": "kerap-qna.dtb",
-                "apq": True,
-            },
-        ],
-        "dtbo_list": [
-            {
-                "name": "kera-rumi-overlay.dtbo",
-                "apq": False,
-            },
-            {"name": "kera-atp-overlay.dtbo"},
-            {"name": "kera-mtp-qca6750-ufs4-overlay.dtbo"},
-            {"name": "kera-mtp-qca6750-ufs3-overlay.dtbo"},
-            {"name": "kera-mtp-qca6750-qmp1000-overlay.dtbo"},
-            {"name": "kera-mtp-wcn7750-qmp1000-overlay.dtbo"},
-            {"name": "kera-mtp-wcn7750-ufs3-overlay.dtbo"},
-            {"name": "kera-mtp-wcn7750-ufs4-overlay.dtbo"},
-            {"name": "kera-cdp-qca6750-ufs2-overlay.dtbo"},
-            {"name": "kera-cdp-qca6750-ufs3-overlay.dtbo"},
-            {"name": "kera-cdp-qca6750-ufs4-overlay.dtbo"},
-            {"name": "kera-iot-cdp-qca6750-ufs4-overlay.dtbo"},
-            {"name": "kera-cdp-qca6750-ufs4-slt-overlay.dtbo"},
-            {"name": "kera-cdp-emmc-overlay.dtbo"},
-            {"name": "kera-qrd-wcn7750-ufs4-overlay.dtbo"},
-            {"name": "kera-qrd-wcn7750-ufs2-overlay.dtbo"},
-            {"name": "kera-qrd-wcn7750-ufs3-overlay.dtbo"},
-            {"name": "kera-qrd-qca6750-ufs2-overlay.dtbo"},
-            {"name": "kera-rcm-qca6750-ufs4-overlay.dtbo"},
-            {"name": "kera-rcm-qca6750-ufs2-overlay.dtbo"},
-            {"name": "kera-rcm-qca6750-ufs3-overlay.dtbo"},
-            {"name": "kera-rcm-wcn7750-ufs2-overlay.dtbo"},
-            {"name": "kera-rcm-wcn7750-ufs3-overlay.dtbo"},
-            {"name": "kera-rcm-wcn7750-ufs4-overlay.dtbo"},
-            {"name": "kera-rcm-wcn7750-emmc-overlay.dtbo"},
-            {"name": "kera-rcm-wcn7750-ufs3-no-display-overlay.dtbo"},
-            {"name": "kera-rcm-wcn7750-ufs4-no-display-overlay.dtbo"},
-            {"name": "kera-rcm-wcn7750-emmc-no-display-overlay.dtbo"},
-            {"name": "kera-idp-emmc-overlay.dtbo"},
-            {"name": "kera-idp-ufs3-overlay.dtbo"},
-            {"name": "kera-evk-emmc-overlay.dtbo"},
-            {"name": "kera-evk-emmc-hdmiearc-dmic-overlay.dtbo"},
-            {"name": "kera-evk-emmc-hdmiearc-hat-overlay.dtbo"},
-            {"name": "kera-evk-emmc-lt9611uxd-dmic-overlay.dtbo"},
-            {"name": "kera-evk-emmc-lt9611uxd-hat-overlay.dtbo"},
-            {"name": "kera-evk-emmc-wcd9378-dmic-overlay.dtbo"},
-            {"name": "kera-evk-emmc-wcd9378-hat-overlay.dtbo"},
         ],
     },
     "parrot-tuivm": {
@@ -311,8 +86,6 @@ _platform_map = {
             {"name": "ravelin-vm-idp-wcn3988.dtb"},
             {"name": "ravelin-vm-idp-wcn3950-amoled-rcm.dtb"},
             {"name": "ravelin-vm-qrd.dtb"},
-            {"name": "montague-vm-hsp.dtb"},
-            {"name": "montague-vm-moselle.dtb"},
         ],
     },
     "sun-tuivm": {
@@ -367,8 +140,6 @@ _platform_map = {
             {"name": "tuna-oemvm-rcm.dtb"},
             {"name": "tuna-oemvm-rcm-kiwi.dtb"},
             {"name": "tuna-oemvm-rumi.dtb"},
-            {"name": "tunap-oemvm.dtb"},
-            {"name": "tuna7-oemvm.dtb"},
             {"name": "tuna-vm-atp.dtb"},
             {"name": "tuna-vm-cdp.dtb"},
             {"name": "tuna-vm-mtp.dtb"},
@@ -378,8 +149,6 @@ _platform_map = {
             {"name": "tuna-vm-rcm.dtb"},
             {"name": "tuna-vm-rcm-kiwi.dtb"},
             {"name": "tuna-vm-rumi.dtb"},
-            {"name": "tunap-vm.dtb"},
-            {"name": "tuna7-vm.dtb"},
         ],
     },
     "tuna-oemvm": {
@@ -394,8 +163,6 @@ _platform_map = {
             {"name": "tuna-oemvm-rcm.dtb"},
             {"name": "tuna-oemvm-rcm-kiwi.dtb"},
             {"name": "tuna-oemvm-rumi.dtb"},
-            {"name": "tunap-oemvm.dtb"},
-            {"name": "tuna7-oemvm.dtb"},
             {"name": "tuna-vm-atp.dtb"},
             {"name": "tuna-vm-cdp.dtb"},
             {"name": "tuna-vm-mtp.dtb"},
@@ -405,49 +172,19 @@ _platform_map = {
             {"name": "tuna-vm-rcm.dtb"},
             {"name": "tuna-vm-rcm-kiwi.dtb"},
             {"name": "tuna-vm-rumi.dtb"},
-            {"name": "tunap-vm.dtb"},
-            {"name": "tuna7-vm.dtb"},
         ],
     },
     "kera-tuivm": {
         "dtb_list": [
             # keep sorted
-            {"name": "kera-oemvm-atp.dtb"},
-            {"name": "kera-oemvm-cdp-qca6750.dtb"},
-            {"name": "kera-oemvm-mtp-qca6750.dtb"},
-            {"name": "kera-oemvm-mtp-wcn7750.dtb"},
-            {"name": "kera-oemvm-qrd-wcn7750.dtb"},
-            {"name": "kera-oemvm-rcm-qca6750.dtb"},
-            {"name": "kera-oemvm-rcm-wcn7750.dtb"},
             {"name": "kera-oemvm-rumi.dtb"},
-            {"name": "kera-vm-atp.dtb"},
-            {"name": "kera-vm-cdp-qca6750.dtb"},
-            {"name": "kera-vm-mtp-qca6750.dtb"},
-            {"name": "kera-vm-mtp-wcn7750.dtb"},
-            {"name": "kera-vm-qrd-wcn7750.dtb"},
-            {"name": "kera-vm-rcm-qca6750.dtb"},
-            {"name": "kera-vm-rcm-wcn7750.dtb"},
             {"name": "kera-vm-rumi.dtb"},
         ],
     },
     "kera-oemvm": {
         "dtb_list": [
             # keep sorted
-            {"name": "kera-oemvm-atp.dtb"},
-            {"name": "kera-oemvm-cdp-qca6750.dtb"},
-            {"name": "kera-oemvm-mtp-qca6750.dtb"},
-            {"name": "kera-oemvm-mtp-wcn7750.dtb"},
-            {"name": "kera-oemvm-qrd-wcn7750.dtb"},
-            {"name": "kera-oemvm-rcm-qca6750.dtb"},
-            {"name": "kera-oemvm-rcm-wcn7750.dtb"},
             {"name": "kera-oemvm-rumi.dtb"},
-            {"name": "kera-vm-atp.dtb"},
-            {"name": "kera-vm-cdp-qca6750.dtb"},
-            {"name": "kera-vm-mtp-qca6750.dtb"},
-            {"name": "kera-vm-mtp-wcn7750.dtb"},
-            {"name": "kera-vm-qrd-wcn7750.dtb"},
-            {"name": "kera-vm-rcm-qca6750.dtb"},
-            {"name": "kera-vm-rcm-wcn7750.dtb"},
             {"name": "kera-vm-rumi.dtb"},
         ],
     },
@@ -530,24 +267,12 @@ _platform_map = {
             {"name": "parrot-sg.dtb"},
             {"name": "parrotp-sg.dtb"},
             {"name": "parrot-4gb.dtb"},
-            {"name": "parrot-lite.dtb"},
             {"name": "ravelin.dtb"},
             {"name": "ravelinp.dtb"},
             {"name": "ravelin-4gb.dtb"},
             {"name": "ravelinp-4gb.dtb"},
             {"name": "ravelin-sg.dtb"},
             {"name": "ravelinp-sg.dtb"},
-            {"name": "montague-cqm-fp1.dtb"},
-            {"name": "montague-cqs-fp1.dtb"},
-            {"name": "montague-cqm-fp2.dtb"},
-            {"name": "montague-cqs-fp2.dtb"},
-            {"name": "montague-cqm-fp3.dtb"},
-            {"name": "montague-cqs-fp3.dtb"},
-            {"name": "montague.dtb"},
-            {"name": "montaguep.dtb"},
-            {"name": "montague-qmb.dtb"},
-            {"name": "montague-4gb.dtb"},
-            {"name": "montaguep-4gb.dtb"},
         ],
         "dtbo_list": [
             # keep sorted
@@ -583,15 +308,6 @@ _platform_map = {
             {"name": "ravelin-qrd-overlay.dtbo"},
             {"name": "ravelin-idp-wcn3988-4gb-overlay.dtbo"},
             {"name": "ravelin-qrd-4gb-overlay.dtbo"},
-            {"name": "montague-rumi-overlay.dtbo"},
-            {"name": "montague-hsp-overlay.dtbo"},
-            {"name": "montague-rcm-overlay.dtbo"},
-            {"name": "montague-wsa-overlay.dtbo"},
-            {"name": "montague-wsd-overlay.dtbo"},
-            {"name": "montague-idp-qps615-overlay.dtbo"},
-            {"name": "montague-adrastea-overlay.dtbo"},
-            {"name": "montague-apache-overlay.dtbo"},
-            {"name": "montague-moselle-overlay.dtbo"},
         ],
     },
 }
@@ -604,11 +320,18 @@ def _get_dtb_lists(target, dt_overlay_supported):
         "dtb_list": [],
         "dtbo_list": [],
     }
-
+    product = mmi_product_name
     for dtb_node in [target] + _platform_map[target].get("binary_compatible_with", []):
-        ret["dtb_list"].extend(_platform_map[dtb_node].get("dtb_list", []))
+        for dtb in _platform_map[dtb_node].get("dtb_list", []):
+            if (dtb.get("product","default") == product) or (dtb.get("product","default") == "default") :
+                # print("target:{} product:{} append dtb_list name {}".format(target, product, dtb.get("name")))
+                ret["dtb_list"].append({"name": "{}".format(dtb.get("name"))})
+
         if dt_overlay_supported:
-            ret["dtbo_list"].extend(_platform_map[dtb_node].get("dtbo_list", []))
+            for dtbo in _platform_map[dtb_node].get("dtbo_list", []):
+                if (dtbo.get("product","default") == product) or (dtbo.get("product","default") == "default") :
+                    # print("target:{} product:{} append dtbo_list name {}".format(target, product, dtbo.get("name")))
+                    ret["dtbo_list"].append({"name": "{}".format(dtbo.get("name"))})
         else:
             # Translate the dtbo list into dtbs we can append to main dtb_list
             for dtb in _platform_map[dtb_node].get("dtb_list", []):

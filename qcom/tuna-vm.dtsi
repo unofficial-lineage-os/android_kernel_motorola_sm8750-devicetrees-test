@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: BSD-3-Clause
 /*
- * Copyright (c) 2024-2025 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
  */
 
 #include <dt-bindings/interrupt-controller/arm-gic.h>
@@ -10,11 +10,11 @@
 / {
 	#address-cells = <0x2>;
 	#size-cells = <0x2>;
-	qcom,msm-id = <681 0x10000>, <655 0x10000>, <694 0x10000>;
+	qcom,msm-id = <681 0x10000>, <655 0x10000>;
 	interrupt-parent = <&vgic>;
 
 	chosen {
-		bootargs = "nokaslr log_buf_len=256K console=hvc0 loglevel=8 swiotlb=noforce memhp_default_state=online_movable memory_hotplug.memmap_on_memory=force rcupdate.rcu_expedited=1 rcu_nocbs=0-1";
+		bootargs = "nokaslr log_buf_len=256K console=hvc0 loglevel=8 swiotlb=noforce";
 	};
 
 	cpus {
@@ -42,24 +42,14 @@
 	};
 
 	idle-states {
-		CPU_PWR_DWN: c4 {  /* Using Gold C4 latencies */
+		CPU_PWR_DWN: c4 {  /* Using Medium C4 latencies */
 			compatible = "arm,idle-state";
-			idle-state-name = "rail-pc";
-			entry-latency-us = <550>;
-			exit-latency-us = <1050>;
-			min-residency-us = <7951>;
-			arm,psci-suspend-param = <0x40000004>;
-			local-timer-stop;
+			status = "disabled";
 		};
 
-		CLUSTER_PWR_DWN: d4 { /* C4+D4 */
+		CLUSTER_PWR_DWN: ss3 { /* C4+CL5+SS3 */
 			compatible = "arm,idle-state";
-			idle-state-name = "l3-pc";
-			entry-latency-us = <750>;
-			exit-latency-us = <2350>;
-			min-residency-us = <9144>;
-			arm,psci-suspend-param = <0x40000044>;
-			local-timer-stop;
+			status = "disabled";
 		};
 	};
 
@@ -300,35 +290,6 @@
 				peer-default;
 			};
 
-			qrtr-shm {
-				vdevice-type = "shm-doorbell";
-				generate = "/hypervisor/qrtr-shm";
-				push-compatible = "qcom,qrtr-gunyah-gen";
-				peer-default;
-				memory {
-					qcom,label = <0x3>;
-					allocate-base;
-				};
-			};
-
-			smmu-proxy-message-queue-pair {
-				vdevice-type = "message-queue-pair";
-				generate = "/hypervisor/smmu-proxy-msgq-pair";
-				message-size = <0x000000f0>;
-				queue-depth = <0x00000008>;
-				peer-default;
-				qcom,label = <0xA>;
-			};
-
-			msgqsock-msgq {
-				vdevice-type = "message-queue-pair";
-				generate = "/hypervisor/msgqsock-msgq-pair";
-				message-size = <0xf0>;
-				queue-depth = <0x8>;
-				peer = "vm-name:qcom,oemvm";
-				qcom,label = <0x3>;
-			};
-
 		};
 	};
 
@@ -469,18 +430,8 @@
 		qcom,support-hypervisor;
 	};
 
-	qrtr-gunyah {
-		compatible = "qcom,qrtr-gunyah";
-		gunyah-label = <3>;
-	};
-
 	qti,smmu-proxy {
 		compatible = "smmu-proxy-receiver";
-	};
-
-	qmsgq-gunyah {
-		compatible = "qcom,qmsgq-gh";
-		msgq-label = <3>;
 	};
 
 	qti,smmu-proxy-camera-cb {
@@ -583,7 +534,6 @@
 		reg-names = "gpi-top";
 		iommus = <&apps_smmu 0xb8 0x0>;
 		qcom,iommu-group = <&qup_iommu_group>;
-		memory-region = <&qup_iommu_group>;
 		dma-coherent;
 		interrupts = <GIC_SPI 279 IRQ_TYPE_LEVEL_HIGH>,
 			<GIC_SPI 280 IRQ_TYPE_LEVEL_HIGH>,
@@ -617,7 +567,6 @@
 			<&gcc GCC_QUPV3_WRAP_1_S_AHB_CLK>;
 		iommus = <&apps_smmu 0xb8 0x0>;
 		qcom,iommu-group = <&qup_iommu_group>;
-		memory-region = <&qup_iommu_group>;
 		dma-coherent;
 		ranges;
 		status = "ok";
@@ -659,7 +608,6 @@
 		reg-names = "gpi-top";
 		iommus = <&apps_smmu 0x438 0x0>;
 		qcom,iommu-group = <&qup_iommu_group>;
-		memory-region = <&qup_iommu_group>;
 		dma-coherent;
 		interrupts = <GIC_SPI 588 IRQ_TYPE_LEVEL_HIGH>,
 			<GIC_SPI 589 IRQ_TYPE_LEVEL_HIGH>,
@@ -693,7 +641,6 @@
 			<&gcc GCC_QUPV3_WRAP_2_S_AHB_CLK>;
 		iommus = <&apps_smmu 0x438 0x0>;
 		qcom,iommu-group = <&qup_iommu_group>;
-		memory-region = <&qup_iommu_group>;
 		dma-coherent;
 		ranges;
 		status = "ok";

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: BSD-3-Clause
 /*
- * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
  */
 
 #include "monaco-idp-v1-common.dtsi"
@@ -31,14 +31,6 @@
 			   "batt-volt";
 };
 
-&spmi_bus {
-	qcom,pm5100@0 {
-		pmic_lpm: qti,pmic-lpm@7200 {
-			compatible = "qcom,pmic-lpm";
-			reg = <0x7200>;
-		};
-	};
-};
 
 &pm5100_gpios {
 	nfc_clk {

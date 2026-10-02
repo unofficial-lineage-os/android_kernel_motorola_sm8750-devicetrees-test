@@ -1,14 +1,10 @@
 // SPDX-License-Identifier: BSD-3-Clause
 /*
- * Copyright (c) 2024-2025 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
  */
 
 #include <dt-bindings/clock/qcom,gcc-kera.h>
 #include <dt-bindings/clock/qcom,rpmh.h>
-
-&chosen {
-	bootargs = "printk.devkmsg=on loglevel=8 rcupdate.rcu_expedited=1 rcu_nocbs=0-7 nokaslr kpti=0 log_buf_len=256K swiotlb=0 loop.max_part=7 irqaffinity=0-2 firmware_class.path=/vendor/firmware_mnt/image,/vendor/firmware ftrace_dump_on_oops page_poison=on cgroup.memory=nokmem,nosocket cpufreq.default_governor=performance";
-};
 
 &arch_timer {
 	clock-frequency = <500000>;
@@ -22,15 +18,11 @@
 	status = "disabled";
 };
 
-&disp_crm {
-	status = "disabled";
-};
-
-&pcie_crm {
-	status = "disabled";
-};
-
 &soc {
+	usb_nop_phy: usb_nop_phy {
+		compatible = "usb-nop-xceiv";
+	};
+
 	usb_emuphy: phy@a784000 {
 		compatible = "qcom,usb-emu-phy";
 		reg = <0x0a784000 0x9500>;
@@ -165,34 +157,4 @@
 
 &APSS_OFF {
 	status = "disabled";
-};
-
-&rpmhcc {
-	compatible = "fixed-clock";
-	clock-output-names = "rpmh_clocks";
-	clock-frequency = <19200000>;
-};
-
-&video_cc_mvs0_gdsc {
-	status = "ok";
-};
-
-&video_cc_mvs0c_gdsc {
-	status = "ok";
-};
-
-&disp_cc_mdss_core_gdsc {
-	status = "ok";
-};
-
-&disp_cc_mdss_core_int2_gdsc {
-	status = "ok";
-};
-
-&gpu_cc_cx_gdsc {
-	status = "ok";
-};
-
-&gpu_cc_gx_gdsc {
-	status = "ok";
 };

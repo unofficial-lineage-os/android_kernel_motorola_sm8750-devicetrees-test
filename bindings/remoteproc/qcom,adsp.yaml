@@ -66,6 +66,7 @@ properties:
       - qcom,tuna-adsp-pas
       - qcom,tuna-cdsp-pas
       - qcom,tuna-modem-pas
+      - qcom,tuna-soccp-pas
       - qcom,parrot-adsp-pas
       - qcom,parrot-cdsp-pas
       - qcom,parrot-modem-pas
@@ -80,9 +81,6 @@ properties:
       - qcom,monaco-adsp-pas
       - qcom,tuna-wpss-pas
       - qcom,kera-wpss-pas
-      - qcom,sm6150-adsp-pas
-      - qcom,sm6150-cdsp-pas
-      - qcom,sm6150-modem-pas
 
   reg:
     maxItems: 1

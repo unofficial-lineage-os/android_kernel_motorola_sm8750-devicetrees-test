@@ -54,7 +54,7 @@
 		iommus = <&apps_smmu 0xe3 0x0>;
 		qcom,iommu-dma-addr-pool = <0x40000000 0xc0000000>;
 		qcom,iommu-geometry = <0x40000000 0x10000000>;
-		qcom,iommu-dma = "atomic";
+		qcom,iommu-dma = "fastmap";
 		ranges;
 		status = "ok";
 
@@ -101,7 +101,6 @@
 			pinctrl-3 = <&qupv3_se5_default_cts>, <&qupv3_se5_default_rts>,
 			<&qupv3_se5_default_tx>, <&qupv3_se5_default_rx>;
 			qcom,wakeup-byte = <0xFD>;
-			qcom,suspend-ignore-children;
 			status = "disabled";
 		};
 

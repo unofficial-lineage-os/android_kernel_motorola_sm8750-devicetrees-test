@@ -1,13 +1,12 @@
 // SPDX-License-Identifier: BSD-3-Clause
 /*
- * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
  */
 
 #include "waipio-vm.dtsi"
-#include <dt-bindings/clock/qcom,gcc-parrot.h>
 
 / {
-	qcom,msm-id = <568 0x10000>, <602 0x10000>, <581 0x10000>, <582 0x10000>, <653 0x10000>, <654 0x10000>;
+	qcom,msm-id = <568 0x10000>, <602 0x10000>, <581 0x10000>, <582 0x10000>;
 	interrupt-parent = <&vgic>;
 
 	qcom,vm-config {
@@ -15,8 +14,7 @@
 				0x0 0x0928000 0x0 0x0928000 0x0 0x4000 0x0
 				0x0 0xc400000 0x0 0xc400000 0x0 0x3000 0x1
 				0x0 0xc42d000 0x0 0xc42d000 0x0 0x4000 0x1
-				0x0 0xc440000 0x0 0xc440000 0x0 0x10000 0x1
-				0x0 0xc450000 0x0 0xc450000 0x0 0x70000 0x1
+				0x0 0xc440000 0x0 0xc440000 0x0 0x80000 0x1
 				0x0 0xc4c0000 0x0 0xc4c0000 0x0 0x10000 0x1>;
 		gic-irq-ranges = <282 282>; /* PVM->SVM IRQ transfer */
 		vdevices {
@@ -35,13 +33,6 @@
 		status = "disabled";
 	};
 
-	gcc: clock-controller@100000 {
-		compatible = "qcom,dummycc";
-		clock-output-names = "gcc_clocks";
-		#clock-cells = <1>;
-		#reset-cells = <1>;
-	};
-
 	vgic: interrupt-controller@17200000 {
 		compatible = "arm,gic-v3";
 		interrupt-controller;
@@ -52,13 +43,14 @@
 		<0x17260000 0x100000>;    /* GICR * 8 */
 	};
 
-	tlmm: pinctrl@f000000 {
+	pinctrl@f000000 {
 		compatible = "qcom,ravelin-vm-tlmm";
-		gpios = /bits/ 16 <92 93 10 11 12 13>;
+		gpios = /bits/ 16 <>;
+		qcom,gpios-reserved = <0 1 2 3 38>;
 	};
 
 	tlmm-vm-mem-access {
-		tlmm-vm-gpio-list = <&tlmm 92 0 &tlmm 93 0 &tlmm 10 0 &tlmm 11 0 &tlmm 12 0 &tlmm 13 0x2008>;
+		tlmm-vm-gpio-list = <>;
 	};
 
 	apps-smmu@15000000 {
@@ -78,8 +70,7 @@
 	/delete-node/ spi@990000;
 
 	qup_iommu_group: qup_common_iommu_group {
-			iommu-addresses = <&gpi_dma0 0x00000000 0x00020000>,
-					<&qupv3_0 0x00000000 0x00020000>;
+			qcom,iommu-dma-addr-pool = <0x00020000 0xfffe0000>;
 	};
 
 	gpi_dma0: qcom,gpi-dma@900000  {
@@ -89,7 +80,6 @@
 		reg-names = "gpi-top";
 		iommus = <&apps_smmu 0x178 0x0>;
 		qcom,iommu-group = <&qup_iommu_group>;
-		memory-region = <&qup_iommu_group>;
 		dma-coherent;
 		interrupts = <GIC_SPI 244 IRQ_TYPE_LEVEL_HIGH>,
 			<GIC_SPI 245 IRQ_TYPE_LEVEL_HIGH>,
@@ -104,8 +94,7 @@
 			<GIC_SPI 254 IRQ_TYPE_LEVEL_HIGH>,
 			<GIC_SPI 255 IRQ_TYPE_LEVEL_HIGH>;
 		qcom,max-num-gpii = <12>;
-		qcom,static-gpii-mask = <0x40>;
-		qcom,gpii-mask = <0x0>;
+		qcom,gpii-mask = <0x40>;
 		qcom,ev-factor = <2>;
 		qcom,gpi-ee-offset = <0x10000>;
 		qcom,le-vm;
@@ -117,16 +106,9 @@
 	qupv3_0: qcom,qupv3_0_geni_se@9c0000 {
 		compatible = "qcom,geni-se-qup";
 		reg = <0x9c0000 0x2000>;
-		#address-cells = <1>;
-		#size-cells = <1>;
-		clock-names = "m-ahb", "s-ahb";
-		clocks = <&gcc GCC_QUPV3_WRAP_1_M_AHB_CLK>,
-			<&gcc GCC_QUPV3_WRAP_1_S_AHB_CLK>;
 		iommus = <&apps_smmu 0x178 0x0>;
 		qcom,iommu-group = <&qup_iommu_group>;
-		memory-region = <&qup_iommu_group>;
 		dma-coherent;
-		ranges;
 		status = "ok";
 
 		/* Legacy Touch over I2C */
@@ -135,8 +117,8 @@
 			reg = <0x984000 0x4000>;
 			#address-cells = <1>;
 			#size-cells = <0>;
-			dmas = <&gpi_dma0 0 1 3 64 0xe>,
-				<&gpi_dma0 1 1 3 64 0xe>;
+			dmas = <&gpi_dma0 0 1 3 64 0>,
+				<&gpi_dma0 1 1 3 64 0>;
 			dma-names = "tx", "rx";
 			qcom,le-vm;
 			status = "disabled";
@@ -148,8 +130,8 @@
 			#address-cells = <1>;
 			#size-cells = <0>;
 			reg-names = "se_phys";
-			dmas = <&gpi_dma0 0 1 1 64 0xe>,
-				<&gpi_dma0 1 1 1 64 0xe>;
+			dmas = <&gpi_dma0 0 1 1 64 0>,
+				<&gpi_dma0 1 1 1 64 0>;
 			dma-names = "tx", "rx";
 			spi-max-frequency = <50000000>;
 			qcom,le-vm;

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: BSD-3-Clause
 /*
- * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
  */
 
 #include "waipio-vm.dtsi"
@@ -8,26 +8,18 @@
 
 / {
 	qcom,msm-id = <537 0x10000>, <583 0x10000>, <613 0x10000>, <631 0x10000>,
-			<633 0x10000>, <634 0x10000>, <638 0x10000>, <663 0x10000>,
-			<713 0x10000>, <714 0x10000>, <715 0x10000>;
+			<633 0x10000>, <634 0x10000>, <638 0x10000>, <663 0x10000>;
 	interrupt-parent = <&vgic>;
 
 	qcom,vm-config {
 		iomemory-ranges = <0x0 0x0a28000 0x0 0x0a28000 0x0 0x4000 0x0
 				0x0 0xc400000 0x0 0xc400000 0x0 0x3000 0x1
 				0x0 0xc42d000 0x0 0xc42d000 0x0 0x4000 0x1
-				0x0 0xc440000 0x0 0xc440000 0x0 0x10000 0x1
-				0x0 0xc450000 0x0 0xc450000 0x0 0x70000 0x1
+				0x0 0xc440000 0x0 0xc440000 0x0 0x80000 0x1
 				0x0 0xc4c0000 0x0 0xc4c0000 0x0 0x10000 0x1
 				0x0 0xae8f000 0x0 0xae8f000 0x0 0x1000 0x0>;
 
 		gic-irq-ranges = <325 325>; /* PVM->SVM IRQ transfer */
-
-		vcpus {
-			affinity = "proxy";
-			affinity-map = <0x0 0x0>;
-		};
-
 		vdevices {
 			gvsock-message-queue-pair {
 				status = "disabled";
@@ -64,39 +56,6 @@
 	tlmm: pinctrl@f000000 {
 		compatible = "qcom,parrot-vm-tlmm";
 		gpios = /bits/ 16 <98 99 10 11 12 13 64 65>;
-
-		qupv3_se11_i2c_active: qupv3_se11_i2c_sda_active {
-			mux {
-				pins = "gpio10";
-				function = "qup1_se3_l0";
-			};
-
-			config {
-				pins = "gpio10";
-				drive-strength = <2>;
-				bias-pull-up;
-			};
-		};
-
-		qupv3_se11_i2c_sleep: qupv3_se11_i2c_sleep {
-			mux {
-				pins = "gpio10";
-				function = "gpio";
-			};
-
-			config {
-				pins = "gpio10";
-				drive-strength = <2>;
-			};
-		};
-	};
-
-	tlmm-vm-test {
-		pinctrl-names = "active", "sleep";
-		pinctrl-0 = <&qupv3_se11_i2c_active>;
-		pinctrl-1 = <&qupv3_se11_i2c_sleep>;
-		tlmm-vm-gpio-list = <&tlmm 98 0 &tlmm 99 0 &tlmm 10 0 &tlmm 11 0
-			&tlmm 12 0 &tlmm 13 0 &tlmm 64 0 &tlmm 65 0>;
 	};
 
 	tlmm-vm-mem-access {
