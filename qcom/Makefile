@@ -315,4 +315,8 @@ endif
 
 always-y        := $(dtb-y)
 subdir-y        := $(dts-dirs)
+# leap: Qualcomm techpack device trees (from LineageOS/android_kernel_qcom_sm8750-devicetrees @ lineage-22.2,
+# CLO KERNEL.PLATFORM.4.0.r1-17300). merge_dtbs.py folds their .dtbo into the base DTBs; the stock leap board
+# overlays in dtbo.img reference their labels (cam_cci0, adsp_loader, lpass_*) and cannot apply without them.
+subdir-y        += audio bt camera data display dsp eSE eva fingerprint graphics mm mmrm nfc synx video wlan
 clean-files     := *.dtb *.dtbo
