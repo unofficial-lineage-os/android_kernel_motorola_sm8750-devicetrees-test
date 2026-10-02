@@ -1,6 +1,2 @@
-# SPDX-License-Identifier: GPL-2.0
-vendor := $(srctree)/$(src)
-
-ifneq "$(wildcard $(vendor)/qcom)" ""
-	subdir-y += qcom
-endif
+# leap: kbuild entry (Motorola ships a bazel Makefile); mirrors LOS *-devicetrees repos
+subdir-y += qcom
