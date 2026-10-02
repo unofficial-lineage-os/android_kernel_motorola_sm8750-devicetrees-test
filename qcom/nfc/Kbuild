@@ -1,3 +1,6 @@
+# leap: keep __symbols__ in the techpack overlays. The kernel only passes -@ to base DTBs (scripts/Makefile.lib:380);
+# without symbols the merged base cannot resolve the stock leap board overlays (cam_cci0, adsp_loader, lpass_*) in ABL.
+DTC_FLAGS += -@
 ifeq ($(CONFIG_ARCH_SUN),y)
 dtbo-y += nxp/sun-nfc.dtbo \
           nxp/sun-nfc-cdp.dtbo \
